@@ -103,7 +103,7 @@
 <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: lightgreen; color: darkgreen; padding-right: 8px; padding-left: 8px">
 
     <a class="navbar-brand" href="{{ url('/') }}" style="color: darkgreen">
-      {{ config('app.name', 'SicaMorA') }}
+      SicaMora
     </a>
     <button class="navbar-toggler" style="align: right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
       <i class="fas fa-bars" style="color: darkgreen"></i>
