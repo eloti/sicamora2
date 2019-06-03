@@ -1,0 +1,5 @@
+
+
+{{session('status')}}
+{{auth()->user()->name}}
+{{session('status')}}
