@@ -1,3 +1,6 @@
+<!-- Welcome blade, muestra todas la publicaciones, la idea es ordenarlas por popularidad
+En el menú se accede a través de "Mis lecturas" -->
+
 @extends('layouts.app')
 
 @section('title', "| Bienvenido")
@@ -14,7 +17,7 @@
         <h3 class="subtitle_h3">Publicaciones populares</h3>
       </div>
 
-      @foreach ($all_post as $onePost)
+      @foreach ($all_post as $onePost) <!-- el controlador está en PagesController.php -->
 
       <div class="card welcome">
 

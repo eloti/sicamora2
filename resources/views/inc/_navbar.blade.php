@@ -141,7 +141,7 @@
         <div class="container" style="padding: 0; margin: 0; width: 100%">
           <div class="row" style="margin: 0">
             <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                <a class="nav-link" href="/home" style="color: darkgreen; text-align: center">Inicio</a>
+                <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Inicio</a>
             </div>
             <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
                 <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Mis lecturas</a>

@@ -13,7 +13,7 @@ use Session;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. Muestra los posteos del usuario logueado
      *
      * @return \Illuminate\Http\Response
      */
@@ -73,7 +73,7 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource. Muestra un posteo específico.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

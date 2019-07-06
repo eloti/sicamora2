@@ -151,7 +151,7 @@ input[type="file"] {
   color: darkgreen;
   margin-bottom: 6px;
   font-weight: bold;
-  }
+}
 .card-title.author {
   font-style: italic;
   font-weight: bold;
@@ -159,6 +159,9 @@ input[type="file"] {
 }
 .card-text.postbody {
   font-size: 12px;
+}
+.row.card-text.postbody {
+  margin: 0;
 }
 .buttontype1 {
   background-color: darkgreen;

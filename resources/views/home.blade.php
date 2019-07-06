@@ -1,3 +1,5 @@
+<!-- Home blade, en el menú se accede a través de "Inicio" -->
+
 @extends('layouts.app')
 
 @section('content')
