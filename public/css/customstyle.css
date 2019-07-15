@@ -19,6 +19,9 @@
   text-align: center;
   font-size: 0.75em;
 }
+.itemmenuactivo {
+  text-decoration: underline;
+}
 /* auth section styles */
 .card.auth {
   /*margin-top: 90px;*/

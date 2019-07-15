@@ -28,4 +28,9 @@ class PagesController extends Controller
     return view('pages.faq')->with('title', $title);
   }
 
+  public function contact(){
+    $title = "Contacto";
+    return view('pages.contact')->with('title', $title);
+  }
+
 }

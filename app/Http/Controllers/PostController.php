@@ -81,7 +81,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('posts.show')->with('post', $post);//
+        return view('posts.show')->with('post', $post);
     }
 
     /**
@@ -92,7 +92,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $genre = Genre::all();
+        return view('posts.edit')->with('post', $post)->with('genre', $genre)->with('user', $user);
     }
 
     /**
@@ -104,7 +108,28 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Validate the Data
+        $this->validate($request, array(
+          'title' => 'required|max:191',
+          'body' => 'required',
+          'user_id' => 'required',
+          'genre_id' => 'required'
+        ));
+        //Save the data to the Database
+        $post = Post::find($id);
+
+        $post->user_id = $request->input('user_id');
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->genre_id = $request->input('genre_id');
+
+        $post->save();
+
+        //set flash data with success message
+        Session::flash('success', "La publicación se ha modificado.");
+
+        //redirect with flash data to posts.show
+        return redirect()->route('posts.show', $post->id);
     }
 
     /**
@@ -115,6 +140,12 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+        $post->delete();
+
+        Session::flash('success', "La publicación ha sido eliminada.");
+
+        return redirect()->route('posts.index');
     }
 }

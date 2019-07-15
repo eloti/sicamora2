@@ -116,23 +116,23 @@
         @guest
         <div class="container-fluid" style="padding: 0; margin: 0">
           <div class="row" style="margin: 0">
-            <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
+            <div class="{{ Request::is("/") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
                 <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Inicio</a>
             </div>
             <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
                 <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Explorar</a>
             </div>
-            <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                  <a class="nav-link" href="/about" style="color: darkgreen; text-align: center">Acerca de</a>
+            <div class="{{ Request::is("about") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
+                <a class="nav-link" href="/about" style="color: darkgreen; text-align: center">Acerca de</a>
             </div>
-            <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
+            <div class="{{ Request::is("faq") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
                 <a class="nav-link" href="/faq" style="color: darkgreen; text-align: center">Preguntas</a>
             </div>
             <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
                 <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Autores</a>
             </div>
-            <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Contacto</a>
+            <div class="{{ Request::is("contact") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
+                <a class="nav-link" href="/contact" style="color: darkgreen; text-align: center">Contacto</a>
             </div>
           </div>
         </div>
@@ -140,7 +140,7 @@
         @else
         <div class="container" style="padding: 0; margin: 0; width: 100%">
           <div class="row" style="margin: 0">
-            <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
+            <div class="{{ Request::is("/") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
                 <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Inicio</a>
             </div>
             <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
@@ -155,8 +155,8 @@
             <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
                 <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Autores</a>
             </div>
-            <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Contacto</a>
+            <div class="{{ Request::is("contact") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
+                <a class="nav-link" href="/contact" style="color: darkgreen; text-align: center">Contacto</a>
             </div>
           </div>
         </div>

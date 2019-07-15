@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/faq', 'PagesController@faq');
+Route::get('/contact', 'PagesController@contact');
 Route::resource('posts', 'PostController');
 Route::resource('genres', 'GenreController');
 Route::resource('assignments', 'AssignmentController');
