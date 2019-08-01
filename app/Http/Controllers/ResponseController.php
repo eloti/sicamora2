@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Comment;
+use App\Response;
 use App\Post;
 use Session;
 
-class CommentController extends Controller
+class ResponseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,25 +38,24 @@ class CommentController extends Controller
     public function store(Request $request)
     {
       //store in the Database
-      $comment = new Comment;
-      $comment->user_id = $request->user_id;
-      $comment->post_id = $request->post_id;
-      $comment->body = $request->body;
-      $comment->rating = $request->rating;
-      $comment->save();
-
-      //dd($comment);
-      //exit;
+      $response = new Response;
+      $response->user_id = $request->user_id;
+      $response->post_id = $request->post_id;
+      $response->comment_id = $request->comment_id;
+      $response->body = $request->body;
+      $response->save();
 
       //get the post's Slug
       $post_id = $request->post_id;
       $post = Post::where('id', $post_id)->first();
       $slug = $post->slug;
 
-      Session::flash('success', 'Se ha publicado su comentario');
+      //return to single.blade.php
+      Session::flash('success', 'Se ha publicado su respuesta');
       //redirect
       return redirect()->action(
         'BlogController@getSingle', ['slug' => $slug]);
+
     }
 
     /**

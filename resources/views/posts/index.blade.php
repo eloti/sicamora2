@@ -11,7 +11,7 @@
   <div class="row">
 
     <div class="col-12">
-      
+
       @guest
         <div class="subtitle_one">
           <h3 class="subtitle_h3">Mis Publicaciones</h3>
@@ -62,7 +62,7 @@
                 </div>
               </div>
               <div class="col-5" style="padding: 0; display: flex; justify-content: flex-end">
-                <a href="/posts/{{$oneUserPost->id}}" class="btn buttontype1">Seguir leyendo</a>
+                <a href="/blog/{{$oneUserPost->slug}}" class="btn buttontype1">Seguir leyendo</a>
               </div>
             </div>
           </div>

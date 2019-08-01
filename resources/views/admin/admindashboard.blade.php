@@ -4,9 +4,15 @@
 
 @section('title', "| Admin")
 
+<script>
+  function changeCloseButton() {
+    document.getElementById("close_button").value = "{{$myTime}}";
+  }
+</script>
+
 @section('content')
 
-<br><br><br><br><br><br><br><br>
+<br>
 
 <div class="row"> <!-- Tabla de géneros -->
   <div class="col-8 offset-2">
@@ -44,17 +50,15 @@
               <div class="col-3">
                 Activo
               </div>
-              <div class="col-3">
-                <a class="btn btn-primary" data-toggle="modal" data-target="#modalEditGenre-{{ $oneGenre->id }}">Editar género</a>
-              </div>
             @else
               <div class="col-3">
                 Cerrado
               </div>
-              <div class="col-3">
-                --
-              </div>
+
             @endif
+            <div class="col-3">
+              <a class="btn btn-primary" data-toggle="modal" data-target="#modalEditGenre-{{ $oneGenre->id }}">Editar género</a>
+            </div>
           </div>
         </div>
       </div>
@@ -62,22 +66,22 @@
       <a class="btn btn-success" data-toggle="modal" data-target="#modalAddGenre">Agregar género</a>
     </div>
     <br>
-  </div>
+  </div> <!-- Fin de tabla de géneros -->
 
 <hr>
 
 <!-- Modal de editar género -->
-<!--@foreach ($genres as $oneGenre)-->
-<!--div class="modal fade" id="modalEditGenre-{{ $oneGenre->id }}" role="dialog">
+<@foreach ($genres as $oneGenre)
+<div class="modal fade" id="modalEditGenre-{{ $oneGenre->id }}" role="dialog">
   <div class="modal-dialog modal-lg">
     <!-- Modal content-->
-    <!--div class="modal-content">
+    <div class="modal-content">
 
       <div class="modal-header">
         <h4 class="modal-title">Editar Género</h4>
       </div>
 
-      <form method="POST" action="/genres/{{$oneGenre->id}}">
+      <form method="POST" action="/genres/{{ $oneGenre->id }}">
         {{method_field('PUT')}}
         {{csrf_field()}}
 
@@ -110,13 +114,10 @@
     </div>
   </div>
 </div>
-<!--@endforeach-->
-
-
+@endforeach
 
 
 <!-- Modal de agregar género -->
-
 <br>
 <div class="modal fade" id="modalAddGenre" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -133,23 +134,20 @@
         <div class="modal-body">
           <div class="container-fluid">
             <div class="form-group row">
-              <label for="value" class="col-4 col-form-label">Género:</label>
-              <input class="col-4 form-control" name="value" id="value" type="text">
+              {{ Form::label("Género:", null, ["class" => "col-form-label col-2"])}}
+              {{ Form::text('value', null, ["class" => 'form-control col-6'] )}}
             </div>
             <div class="form-group row">
-              <label for="description" class="col-4 col-form-label">Descripción:</label>
-              <input class="col-4 form-control" name="description" id="description" type="textarea">
+              {{ Form::label("Descripción:", null, ["class" => "col-form-label col-2"])}}
+              {{ Form::textarea('description', null, ["class" => 'form-control col-10', 'rows' => 4] )}}
             </div>
           </div>
         </div>
 
         <div class="modal-footer">
-          <button class="action_button" type="submit">Agregar</button>
-          <input class="action_button" id="close_button" type="submit" name="closed_at" value="Cerrar género" onclick="changeCloseButton()">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <button class="btn btn-success modalbutton" type="submit">Agregar</button>
+          <button type="button" class="btn btn-success modalbutton" data-dismiss="modal">Cerrar</button>
         </div>
-
-
 
       </form>
 
@@ -228,15 +226,5 @@
 </div>
 
 <hr>
-
-@endsection
-
-@section('scripts')
-
-<script>
-  function changeCloseButton() {
-    document.getElementById("close_button").value = "{{$myTime}}";
-  }
-</script>
 
 @endsection

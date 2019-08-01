@@ -22,12 +22,11 @@
 
             {{ Form::label("Título:", null, ["class" => "col-form-label col-2"])}}
             {{ Form::text('title', null, ["class" => 'form-control']) }}
-            <!--label for="title" class="col-form-label col-2">Título:</label>
-            <input class="form-control col-12" name="title" id="title" type="text" required maxlength="191"-->
+
+            {{ Form::label("Slug:", null, ["class" => "col-form-label col-2"])}}
+            {{ Form::text('slug', null, ["class" => 'form-control']) }}
 
             {{ Form::label("Género:", null, ["class" => "col-form-label col-2"])}}
-
-            <label for="genre_id" class="col-form-label col-2">Género:</label>
 
             <div class="col-md-4">
               <select name="genre_id" required>

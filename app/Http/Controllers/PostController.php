@@ -21,7 +21,7 @@ class PostController extends Controller
     {
       $user_id = auth()->user()->id;
       $user = User::find($user_id);
-      $user_posts = Post::where('user_id', $user_id)->get();
+      $user_posts = Post::where('user_id', $user_id)->orderBy('created_at', 'desc')->paginate(5);
       $genre = Genre::all();
 
       return view ('posts.index')->with('user', $user)->with('user_posts', $user_posts)->with('genre', $genre);
@@ -49,27 +49,40 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        //Create the slug
+        $normedtitle = str_replace(' ', '_', $request->title);
+        $slug = $request->user_id."+".$normedtitle;
+
         //validate the Data
         $this->validate($request, array(
-          'title' => 'required|max:191',
+          'title' => 'required|max:255',
           'body' => 'required',
           'user_id' => 'required',
           'genre_id' => 'required'
         ));
+        //validate the slug
+        //$this->validate($slug, 'required|alpha_dash|min:5|max:255|unique:posts,slug');
+
         //store in the Database
         $post = new Post;
         $post->user_id = $request->user_id;
         $post->title = $request->title;
+        $post->slug = $slug;
         $post->body = $request->body;
         $post->genre_id = $request->genre_id;
         $post->save();
 
+        $user_id = $request->user_id;
+        $user = User::find($user_id);
+
         //dd($post);
         //exit;
 
-        Session::flash('success', 'Se ha publicado su aporte');
+        Session::flash('success', 'Se ha publicado su comentario');
         //redirect
-        return view('posts.show')->with('post', $post);
+        return redirect()->action(
+          'BlogController@getSingle', ['slug' => $slug]);
+          
     }
 
     /**
@@ -78,10 +91,21 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $post = Post::find($id);
-        return view('posts.show')->with('post', $post);
+    //public function show($id)
+    //{
+        //$post = Post::find($id);
+        //return view('posts.show')->with('post', $post);
+    //}
+
+    public function show ($slug) {
+      //fetch from the DB based on Slugs
+      $post = Post::where('slug', $slug)->first();
+      //return the view and pass in the post object
+
+          //dd($post);
+          //exit;
+
+    return view('blog.single')->with('post', $post);
     }
 
     /**
@@ -109,17 +133,28 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //Validate the Data
+        $post = Post::find($id);
+        if ($request->input('slug') == $post->slug) {
+          $this->validate($request, array(
+            'title' => 'required|max:191',
+            'body' => 'required',
+            'user_id' => 'required',
+            'genre_id' => 'required'));
+        } else {
         $this->validate($request, array(
           'title' => 'required|max:191',
+          'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
           'body' => 'required',
           'user_id' => 'required',
           'genre_id' => 'required'
         ));
+        }
         //Save the data to the Database
         $post = Post::find($id);
 
         $post->user_id = $request->input('user_id');
         $post->title = $request->input('title');
+        $post->slug = $request->input('slug');
         $post->body = $request->input('body');
         $post->genre_id = $request->input('genre_id');
 

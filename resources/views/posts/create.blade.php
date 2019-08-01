@@ -22,7 +22,10 @@
             <input type="hidden" name="user_id" value="{{$user->id}}" readonly>
 
             <label for="title" class="col-form-label col-2">Título:</label>
-            <input class="form-control col-12" name="title" id="title" type="text" required maxlength="191">
+            <input class="form-control col-12" name="title" id="title" type="text" required maxlength="255">
+
+            <!--label for="slug" class="col-form-label col-2">Slug:</label>
+            <input class="form-control col-12" name="slug" id="slug" type="text" required minlength="5" maxlength="255"-->
 
             <label for="genre_id" class="col-form-label col-2">Género:</label>
             <div class="col-md-4">

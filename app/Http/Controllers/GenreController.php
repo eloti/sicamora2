@@ -93,8 +93,8 @@ class GenreController extends Controller
         $genre->closed_at = $request->input('closed_at');
       }
 
-      dd($genre);
-      exit;
+      //dd($genre);
+      //exit;
 
         $genre->save();
         return redirect('/admin/admindashboard');

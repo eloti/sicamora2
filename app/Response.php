@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Response extends Model
 {
   // Table name
-  protected $table = 'comments';
+  protected $table = 'reponses';
   // Primary Key
   public $primaryKey = 'id';
 
@@ -19,5 +19,9 @@ class Comment extends Model
   public function user()
   {
       return $this->belongsTo(User::class, 'user_id');
+  }
+  public function comment()
+  {
+      return $this->belongsTo(Comment::class, 'comment_id');
   }
 }

@@ -35,7 +35,11 @@
   background-color: darkgreen;
   padding: 5px;
 }
-
+/* Modal styles */
+.modalbutton {
+  padding: 10px;
+  margin: 1px;
+}
 
 /* Form styles */
 .col-form-label {
@@ -113,7 +117,7 @@ input[type="file"] {
 }
 .subtitle_one_logged {
   text-align: center;
-  margin-top: 120px;
+  margin-top: 0px;
 }
 .subtitle_h3 {
   margin: 0;

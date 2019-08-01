@@ -1,5 +1,6 @@
 <!-- Welcome blade, muestra todas la publicaciones, la idea es ordenarlas por popularidad
-En el menú se accede a través de "Mis lecturas" -->
+Una visita accede clickeando "Inicio" en el navbar
+El controlador es PagesController.php -->
 
 @extends('layouts.app')
 
@@ -57,7 +58,7 @@ En el menú se accede a través de "Mis lecturas" -->
                 </div>
               </div>
               <div class="col-5" style="padding: 0; display: flex; justify-content: flex-end">
-                <a href="/posts/{{$onePost->id}}" class="btn buttontype1">Seguir leyendo</a>
+                <a href="/blog/{{$onePost->slug}}" class="btn buttontype1">Seguir leyendo</a>
               </div>
             </div>
           </div>
@@ -70,32 +71,15 @@ En el menú se accede a través de "Mis lecturas" -->
       <div class="paginationbuttons" style="margin-top: 10px; display: flex; justify-content: center">
         {{$all_post->links()}} <!-- for the pagination -->
       </div>
+      <div style="margin-top: 10px; display: flex; justify-content: center">
+        Mostrando página {{$all_post->currentPage()}} de {{$all_post->lastPage()}}
+      </div>
 
     </div> <!-- end of showing posts -->
 
-    <div class="col-md-3 offset-md-1">
-      <div class="subtitle" style="text-align: center">
-        <h2>Novedades</h2>
-      </div>
-      <hr>
-      <div class="news">
-        <h4>Novedad 1</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-        <a href="#" class="btn btn-secondary">Read more<a>
-      </div>
-      <hr>
-      <div class="news">
-        <h4>Novedad 2</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-        <a href="#" class="btn btn-secondary">Read more<a>
-      </div>
+  </div> <!-- end of row -->
 
-    </div>
-
-  </div>
-
-
-</div>
+</div> <!-- end of container -->
 
 <br>
 
