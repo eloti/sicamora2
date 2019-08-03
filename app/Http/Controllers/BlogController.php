@@ -7,6 +7,7 @@ use App\Post;
 use App\Comment;
 use App\Response;
 use App\User;
+use Auth;
 
 class BlogController extends Controller
 {
@@ -21,10 +22,19 @@ class BlogController extends Controller
     $responses = Response::where('post_id', $post->id)->orderBy('created_at', 'desc')->get();
 
     //fetch logged user Data
-    $user_id = auth()->user()->id;
-    $user = User::find($user_id);
+     if(Auth::check()) {
 
-    //return the view and pass in the post object
-    return view('blog.single')->with('post', $post)->with('comments', $comments)->with('responses', $responses)->with('user', $user);
-  }
+       $user_id = auth()->user()->id;
+       $user = User::find($user_id);
+
+      //return the view and pass in the post object
+      return view('blog.single')->with('post', $post)->with('comments', $comments)->with('responses', $responses)->with('user', $user);
+
+      } else {
+
+      //return the view and pass in the post object
+      return view('blog.single')->with('post', $post)->with('comments', $comments)->with('responses', $responses);
+
+      }
+    }
 }

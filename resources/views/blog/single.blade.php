@@ -192,7 +192,8 @@
 
 
 
-<!-- Comment a post modal -->
+<!-- CreateComment modal -->
+@if(Auth::check())
 <div class="modal" id="modalCreateComment">
   <div class="modal-dialog modal-lg">
     <!-- Modal content-->
@@ -233,7 +234,8 @@
 
     </div>
   </div>
-</div> <!-- end modal create comment -->
+</div> <!-- end of CreateComment modal -->
+@endif
 
 
 

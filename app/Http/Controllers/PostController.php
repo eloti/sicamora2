@@ -82,7 +82,7 @@ class PostController extends Controller
         //redirect
         return redirect()->action(
           'BlogController@getSingle', ['slug' => $slug]);
-          
+
     }
 
     /**
@@ -158,13 +158,16 @@ class PostController extends Controller
         $post->body = $request->input('body');
         $post->genre_id = $request->input('genre_id');
 
+        $slug = $request->slug;
+
         $post->save();
 
         //set flash data with success message
         Session::flash('success', "La publicación se ha modificado.");
 
         //redirect with flash data to posts.show
-        return redirect()->route('posts.show', $post->id);
+        return redirect()->action(
+          'BlogController@getSingle', ['slug' => $slug]);
     }
 
     /**
