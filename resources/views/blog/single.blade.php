@@ -113,7 +113,9 @@
                         <div class="col-4">
                         </div>
                         <div class="col-2">
-                          <button type="button" class="btn buttontype1" data-toggle="modal" data-target="#modalCreateResponse-{{$oneComment->id}}">Responder</button>
+                          @if(Auth::check())
+                            <button type="button" class="btn buttontype1" data-toggle="modal" data-target="#modalCreateResponse-{{$oneComment->id}}">Responder</button>
+                          @endif
                         </div>
                       </div>
                     </div>
@@ -142,6 +144,7 @@
                   </div> <!-- end of card for each individual comment -->
 
                   <!-- Respond a comment modal -->
+                  @if(Auth::check())
                   <div class="modal" id="modalCreateResponse-{{$oneComment->id}}">
                     <div class="modal-dialog modal-lg">
                       <!-- Modal content-->
@@ -177,6 +180,7 @@
                       </div>
                     </div>
                   </div> <!-- end modal respond comment -->
+                  @endif
 
                 @endforeach
               </div>
