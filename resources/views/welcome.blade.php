@@ -47,13 +47,23 @@ El controlador es PagesController.php -->
               <div class="col-7" style="padding: 0; display: flex; align-items: center">
                 <div class="row cardheadfoot" style="width: 100%">
                   <div class="col-4" style="padding: 0">
-                    <i class="fas fa-eye" style="color: darkgreen"><bdi class="iconcount"> 10</bdi></i>
+                    <i class="fas fa-eye" style="color: darkgreen"><bdi class="iconcount"> {{$onePost->counter}} </bdi></i>
                   </div>
+
                   <div class="col-4" style="padding: 0">
-                    <i class="fas fa-heart" style="color: darkgreen"><bdi class="iconcount"> 6</bdi></i>
+                    <i class="fas fa-heart" style="color: darkgreen"><span class="iconcount rating" id="avg_rating"> {{$onePost->average_rating}}</span></i>
+
+                    <script>
+                      var ratings = document.querySelectorAll(".rating")
+                      ratings.forEach(function(rating){
+                      rating.innerText= Number(rating.innerText).toFixed(1)
+                      })
+                    </script>
+
                   </div>
+
                   <div class="col-4" style="padding: 0">
-                    <i class="fas fa-comment-alt" style="color: darkgreen"><bdi class="iconcount"> 505</bdi></i>
+                    <i class="fas fa-comment-alt" style="color: darkgreen"><bdi class="iconcount"> {{$onePost->comments}}</bdi></i>
                   </div>
                 </div>
               </div>
@@ -68,12 +78,14 @@ El controlador es PagesController.php -->
 
       @endforeach
 
-      <div class="paginationbuttons" style="margin-top: 10px; display: flex; justify-content: center">
-        {{$all_post->links()}} <!-- for the pagination -->
-      </div>
-      <div style="margin-top: 10px; display: flex; justify-content: center">
-        Mostrando página {{$all_post->currentPage()}} de {{$all_post->lastPage()}}
-      </div>
+       <!-- for the pagination -->
+       <div class="paginationbuttons" style="margin-top: 10px; display: flex; justify-content: center">
+         {{$all_post->links()}} <!-- for the pagination -->
+       </div>
+       <div style="margin-top: 10px; display: flex; justify-content: center">
+         Mostrando página {{$all_post->currentPage()}} de {{$all_post->lastPage()}}
+       </div>
+
 
     </div> <!-- end of showing posts -->
 
@@ -82,5 +94,19 @@ El controlador es PagesController.php -->
 </div> <!-- end of container -->
 
 <br>
+
+@endsection
+
+<!--@section('scripts')
+
+  <script>
+
+  var ratings = document.querySelectorAll(".rating")
+    ratings.forEach(function(rating){
+        rating.innerText= Number(rating.innerText).toFixed(1)
+    })
+  </script>
+
+
 
 @endsection

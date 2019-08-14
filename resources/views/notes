@@ -3,3 +3,13 @@
 {{session('status')}}
 {{auth()->user()->name}}
 {{session('status')}}
+
+
+
+
+<div class="paginationbuttons" style="margin-top: 10px; display: flex; justify-content: center">
+  {{$all_post->links()}} <!-- for the pagination -->
+</div>
+<div style="margin-top: 10px; display: flex; justify-content: center">
+  Mostrando página {{$all_post->currentPage()}} de {{$all_post->lastPage()}}
+</div>

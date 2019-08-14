@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropPrevCommentIdFromCommentTable extends Migration
+class AddClosedAtToLanguages extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class DropPrevCommentIdFromCommentTable extends Migration
      */
     public function up()
     {
-      Schema::table('comments', function (Blueprint $table) {
-      $table->dropColumn(['prev_comment_id']);
-      });
+        Schema::table('languages', function (Blueprint $table) {
+            $table->date('closed_at')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -25,7 +26,7 @@ class DropPrevCommentIdFromCommentTable extends Migration
      */
     public function down()
     {
-        Schema::table('comment', function (Blueprint $table) {
+        Schema::table('languages', function (Blueprint $table) {
             //
         });
     }

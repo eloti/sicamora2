@@ -27,12 +27,19 @@ class BlogController extends Controller
        $user_id = auth()->user()->id;
        $user = User::find($user_id);
 
+       if(auth()->user()->id !== $post->user_id) {
+         $post->counter = $post->counter + 1;
+         $post->save();
+       }
+
       //return the view and pass in the post object
       return view('blog.single')->with('post', $post)->with('comments', $comments)->with('responses', $responses)->with('user', $user);
 
       } else {
 
       //return the view and pass in the post object
+      $post->counter = $post->counter + 1;
+      $post->save();
       return view('blog.single')->with('post', $post)->with('comments', $comments)->with('responses', $responses);
 
       }

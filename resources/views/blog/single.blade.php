@@ -217,11 +217,45 @@
               {{ Form::label("Comentario:", null, ["class" => "col-form-label col-2"]) }}
               {{ Form::textarea('body', null, ["class" => 'form-control col-10', 'rows' => 4]) }}
             </div>
+            <hr>
             <div class="form-group row">
-              <label for="rating" class="col-form-label col-2">Puntaje:</label>
-              <input type="radio" name="rating" value="0"> No me gusta<br>
-              <input type="radio" name="rating" value="1"> Neutro<br>
-              <input type="radio" name="rating" value="2"> Me gusta
+
+                <div class="col-12" style="text-align: center">
+                  <p>Califique la publicación del 1 al 5, siendo 1 "no me gusta" y 5 "me gusta mucho":</p>
+                </div>
+
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-1">
+                      </div>
+                        <?php
+                          for($points = 1; $points <= 5; $points++) { ?>
+                            <div class="col-2" style="text-align: center">
+                              <input type="radio" name="rating" value=<?php echo($points)?>>
+                            </div>
+                        <?php
+                        } ?>
+                      <div class="col-1">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-1">
+                      </div>
+                        <?php
+                          for($points = 1; $points <= 5; $points++) { ?>
+                            <div class="col-2" style="text-align: center">
+                              {{$points}}
+                            </div>
+                        <?php
+                        } ?>
+                      <div class="col-1">
+                    </div>
+                  </div>
+                </div>
+
             </div>
               <!-- hay que agregar oculto el post_id, user_id (el que hace el comentario), prev_comment_id == null-->
               <input type="hidden" name="user_id" value="{{$user->id}}" readonly>

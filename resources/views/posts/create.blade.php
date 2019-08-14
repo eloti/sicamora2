@@ -32,7 +32,9 @@
               <select name="genre_id" required>
                 <option value="">Elija un género</option>
                   @foreach($genre as $oneGenre)
-                    <option value="{{$oneGenre->id}}">{{$oneGenre->value}}</option>
+                    @if($oneGenre->closed_at == null)
+                      <option value="{{$oneGenre->id}}">{{$oneGenre->value}}</option>
+                    @endif
                   @endforeach
               </select>
             </div>

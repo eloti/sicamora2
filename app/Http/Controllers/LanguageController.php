@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Assignment;
+use App\Language;
 use Carbon\Carbon;
 use Session;
 
-class AssignmentController extends Controller
+class LanguageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,17 +37,11 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-      //validate the Data
-      $this->validate($request, array(
-        'title' => ['required', 'unique:assignments'],
-        'description' => 'required'
-      ));
       //store in the Database
-      $assignment = new Assignment;
-      $assignment->title = $request->title;
-      $assignment->description = $request->description;
-      $assignment->save();
-      Session::flash('success', 'Se ha creado una nueva consigna');
+      $language = new Language;
+      $language->value = $request->value;
+      $language->save();
+      Session::flash('success', 'Se ha agregado un nuevo idioma');
       //redirect
       return redirect('/admin/admindashboard');
     }
@@ -83,27 +77,23 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $assignment = Assignment::find($id);
+      $language = Language::find($id);
       $myTime = Carbon::now('America/Argentina/Buenos_Aires');
 
       //dd($request);
       //exit;
 
-      if($request->input('description')) {
-        $assignment->description = $request->input('description');
-      }
-
       //closed_at == 0 means genre has been closed
       //closed_at == 1 means genre is active
-      if($assignment->closed_at == null AND $request->input('close_flag') == 0) {
-        $assignment->closed_at = $myTime;
+      if($language->closed_at == null AND $request->input('close_flag') == 0) {
+        $language->closed_at = $myTime;
         } else {
-          if($assignment->closed_at !== null AND $request->input('close_flag') == 1) {
-            $assignment->closed_at = null;
+          if($language->closed_at !== null AND $request->input('close_flag') == 1) {
+            $language->closed_at = null;
           }
         }
 
-      $assignment->save();
+      $language->save();
       return redirect('/admin/admindashboard');
     }
 

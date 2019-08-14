@@ -21,7 +21,14 @@ class PostController extends Controller
     {
       $user_id = auth()->user()->id;
       $user = User::find($user_id);
-      $user_posts = Post::where('user_id', $user_id)->orderBy('created_at', 'desc')->paginate(5);
+      //$user_posts = Post::where('user_id', $user_id)->orderBy('created_at', 'desc')->paginate(5);
+      $user_posts = Post::select(\DB::raw('posts.*, COUNT(comments.post_id) as comments, AVG(comments.rating) as average_rating'))
+                ->where('posts.user_id', $user_id)
+                ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
+                ->groupBy('posts.id', 'posts.created_at', 'posts.updated_at', 'posts.user_id', 'posts.title', 'posts.body', 'posts.assignment_id', 'posts.genre_id', 'posts.slug', 'posts.counter')
+                ->orderBy('created_at', 'desc')
+                ->paginate(5);
+
       $genre = Genre::all();
 
       return view ('posts.index')->with('user', $user)->with('user_posts', $user_posts)->with('genre', $genre);

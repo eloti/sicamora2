@@ -1,4 +1,5 @@
 <!-- Index Post Blade -->
+<!-- PostsController index() function -->
 
 @extends('layouts.app')
 
@@ -51,13 +52,21 @@
               <div class="col-7" style="padding: 0; display: flex; align-items: center">
                 <div class="row cardheadfoot" style="width: 100%">
                   <div class="col-4" style="padding: 0">
-                    <i class="fas fa-eye" style="color: darkgreen"><bdi class="iconcount"> 10</bdi></i>
+                    <i class="fas fa-eye" style="color: darkgreen"><bdi class="iconcount">{{$oneUserPost->counter}}</bdi></i>
                   </div>
                   <div class="col-4" style="padding: 0">
-                    <i class="fas fa-heart" style="color: darkgreen"><bdi class="iconcount"> 6</bdi></i>
+                    <i class="fas fa-heart" style="color: darkgreen"><span class="iconcount rating">{{$oneUserPost->average_rating}}</span></i>
                   </div>
+
+                  <script>
+                    var ratings = document.querySelectorAll(".rating")
+                    ratings.forEach(function(rating){
+                    rating.innerText= Number(rating.innerText).toFixed(1)
+                    })
+                  </script>
+
                   <div class="col-4" style="padding: 0">
-                    <i class="fas fa-comment-alt" style="color: darkgreen"><bdi class="iconcount"> 505</bdi></i>
+                    <i class="fas fa-comment-alt" style="color: darkgreen"><bdi class="iconcount">{{$oneUserPost->comments}}</bdi></i>
                   </div>
                 </div>
               </div>

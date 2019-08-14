@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Genre;
+use Carbon\Carbon;
 use Session;
 
 class GenreController extends Controller
@@ -36,8 +37,6 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-      //dd($request);
-      //exit;
       //validate the Data
       $this->validate($request, array(
         'value' => ['required', 'unique:genres'],
@@ -84,20 +83,29 @@ class GenreController extends Controller
      */
     public function update(Request $request, $id)
     {
+
       $genre = Genre::find($id);
+      $myTime = Carbon::now('America/Argentina/Buenos_Aires');
+
+      //dd($request);
+      //exit;
 
       if($request->input('description')) {
         $genre->description = $request->input('description');
       }
-      if($request->input('closed_at')) {
-        $genre->closed_at = $request->input('closed_at');
-      }
 
-      //dd($genre);
-      //exit;
+      //closed_at == 0 means genre has been closed
+      //closed_at == 1 means genre is active
+      if($genre->closed_at == null AND $request->input('close_flag') == 0) {
+        $genre->closed_at = $myTime;
+        } else {
+          if($genre->closed_at !== null AND $request->input('close_flag') == 1) {
+            $genre->closed_at = null;
+          }
+        }
 
-        $genre->save();
-        return redirect('/admin/admindashboard');
+      $genre->save();
+      return redirect('/admin/admindashboard');
 
     }
 
@@ -111,4 +119,5 @@ class GenreController extends Controller
     {
         //
     }
+
 }

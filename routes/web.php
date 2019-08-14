@@ -21,6 +21,7 @@ Route::get('/faq', 'PagesController@faq');
 Route::get('/contact', 'PagesController@contact');
 Route::resource('posts', 'PostController');
 Route::resource('genres', 'GenreController');
+Route::resource('languages', 'LanguageController');
 Route::resource('assignments', 'AssignmentController');
 Route::resource('comments', 'CommentController');
 Route::resource('responses', 'ResponseController');

@@ -119,17 +119,22 @@
           {!! Form::label('language_id', 'Idiomas: ', ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, col-form-label']) !!}
           <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 no_padding_div_flex">
             @foreach($languages as $oneLanguage)
-              @foreach($user->language as $lang)
-                @if($oneLanguage->id === $lang->id)
-                  <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 radio_buttons_div">
-                    {!! Form::checkbox('language_id[]', $oneLanguage->id, true) !!}<span class=radio_label> {{$oneLanguage->value}}</span>
-                  </div>
-                  @php continue 2; @endphp
-                @endif
-              @endforeach
+
+                @foreach($user->language as $lang)
+                  @if($oneLanguage->id === $lang->id)
+                    <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 radio_buttons_div">
+                      {!! Form::checkbox('language_id[]', $oneLanguage->id, true) !!}<span class=radio_label> {{$oneLanguage->value}}</span>
+                    </div>
+                    @php continue 2; @endphp
+                  @endif
+                @endforeach
+              @if($oneLanguage->closed_at == null)
               <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 radio_buttons_div">
-                {!! Form::checkbox('language_id[]', $oneLanguage->id) !!}<span class=radio_label> {{$oneLanguage->value}}</span>
+
+                  {!! Form::checkbox('language_id[]', $oneLanguage->id) !!}<span class=radio_label> {{$oneLanguage->value}}</span>
+                
               </div>
+              @endif
             @endforeach
           </div>
         </div>

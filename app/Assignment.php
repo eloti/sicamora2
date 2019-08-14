@@ -23,4 +23,5 @@ class Assignment extends Model
     $date = new Carbon($this->closed_at);
     return $date->format('d/m/y');
   }
+  
 }
