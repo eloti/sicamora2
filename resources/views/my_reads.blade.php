@@ -4,7 +4,7 @@ El controlador es PagesController.php -->
 
 @extends('layouts.app')
 
-@section('title', "| Bienvenido")
+@section('title', "| Mis lecturas")
 
 @section('content')
 
@@ -15,8 +15,24 @@ El controlador es PagesController.php -->
     <div class="col-12">
 
       <div class="subtitle_one">
-        <h3 class="subtitle_h3">Publicaciones que más gustan a nuestros lectores</h3>
+        <h3 class="subtitle_h3">Mis Lecturas</h3>
       </div>
+
+      @if (count($all_post) == 0)
+
+      <br><br>
+        <div class="row">
+          <div class="col-2">
+          </div>
+          <div class="col-8">
+            <h4 style="text-align: center">Usted no ha seleccionado publicaciones para agregar a "Mis Lecturas"</h4>
+            <p>Explore el sitio mediante la barra de navegación. Al ingresar a publicaciones para leer, podrá agregar las de su interes haciendo click en "Agregar a Mis Lecturas".</p>
+          </div>
+          <div class="col-2">
+          </div>
+        </div>
+
+      @else
 
       @foreach ($all_post as $onePost) <!-- el controlador está en PagesController.php -->
 
@@ -60,7 +76,6 @@ El controlador es PagesController.php -->
                       rating.innerText= Number(rating.innerText).toFixed(1)
                       })
                     </script>
-
                   </div>
 
                   <div class="col-3" style="padding: 0">
@@ -89,15 +104,7 @@ El controlador es PagesController.php -->
       </div> <!-- end card welcome -->
 
       @endforeach
-
-       <!-- for the pagination -->
-       <div class="paginationbuttons" style="margin-top: 10px; display: flex; justify-content: center">
-         {{$all_post->links()}} <!-- for the pagination -->
-       </div>
-       <div style="margin-top: 10px; display: flex; justify-content: center">
-         Mostrando página {{$all_post->currentPage()}} de {{$all_post->lastPage()}}
-       </div>
-
+      @endif
 
     </div> <!-- end of showing posts -->
 

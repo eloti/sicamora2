@@ -22,6 +22,12 @@
 .itemmenuactivo {
   text-decoration: underline;
 }
+/* pages styles */
+.maintitle {
+  font-family: 'Cinzel Decorative', cursive;
+  color: darkgreen;
+}
+
 /* auth section styles */
 .card.auth {
   /*margin-top: 90px;*/

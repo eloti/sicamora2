@@ -23,6 +23,22 @@
         </div>
       @endguest
 
+      @if (count($user_posts) == 0)
+
+      <br><br>
+        <div class="row">
+          <div class="col-2">
+          </div>
+          <div class="col-8">
+            <h4 style="text-align: center">Usted no ha publicado un aporte en Sicamora</h4>
+            <p style="text-align: center">Haga click sobre "Publicar" en la barra de navegación para redactar su primer aporte.</p>
+          </div>
+          <div class="col-2">
+          </div>
+        </div>
+
+      @else
+
       @foreach ($user_posts as $oneUserPost)
 
       <div class="card welcome">
@@ -42,7 +58,7 @@
 
         <div class="card-body">
           <h5 class="card-title posttitle">{{$oneUserPost->title}}</h5>
-          <h6 class="card-title author">Autor: {{$oneUserPost->user->name}}</h6>
+          <h6 class="card-title author">Autor: {{$oneUserPost->user->alias}}</h6>
           <p class="card-text postbody"><?php echo substr($oneUserPost->body, 0, 250)."...";?></p>
         </div>
 
@@ -80,6 +96,7 @@
       </div> <!-- end card welcome -->
 
       @endforeach
+      @endif
 
     </div>
 

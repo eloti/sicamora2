@@ -4,7 +4,7 @@ El controlador es PagesController.php -->
 
 @extends('layouts.app')
 
-@section('title', "| Bienvenido")
+@section('title', "| Nuevas publicaciones")
 
 @section('content')
 
@@ -15,7 +15,7 @@ El controlador es PagesController.php -->
     <div class="col-12">
 
       <div class="subtitle_one">
-        <h3 class="subtitle_h3">Publicaciones que más gustan a nuestros lectores</h3>
+        <h3 class="subtitle_h3">Publicaciones recientes</h3>
       </div>
 
       @foreach ($all_post as $onePost) <!-- el controlador está en PagesController.php -->
@@ -85,19 +85,10 @@ El controlador es PagesController.php -->
             </div>
           </div>
         </div>
-
+        
       </div> <!-- end card welcome -->
 
       @endforeach
-
-       <!-- for the pagination -->
-       <div class="paginationbuttons" style="margin-top: 10px; display: flex; justify-content: center">
-         {{$all_post->links()}} <!-- for the pagination -->
-       </div>
-       <div style="margin-top: 10px; display: flex; justify-content: center">
-         Mostrando página {{$all_post->currentPage()}} de {{$all_post->lastPage()}}
-       </div>
-
 
     </div> <!-- end of showing posts -->
 

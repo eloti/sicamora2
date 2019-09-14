@@ -85,7 +85,7 @@ class PostController extends Controller
         //dd($post);
         //exit;
 
-        Session::flash('success', 'Se ha publicado su comentario');
+        Session::flash('success', 'Ha realizado una nueva publicación');
         //redirect
         return redirect()->action(
           'BlogController@getSingle', ['slug' => $slug]);

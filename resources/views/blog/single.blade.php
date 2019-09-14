@@ -31,9 +31,25 @@
             <div class="row cardheadfoot">
               @guest <!-- si es guest no muestra los botones de editar, comentar y eliminar -->
 
-                <div class="col-6">
-                  <h6 class="subtitle_h3_nolines"><a href="/blog/{{$post->slug}}">{{ url('blog/'.$post->slug) }}</a></h6>
-                </div>
+              <div class="col-3" style="padding: 0">
+                <i class="fas fa-eye" style="color: darkgreen"><bdi class="iconcount"> {{$post->counter}} </bdi></i>
+              </div>
+
+              <div class="col-3" style="padding: 0">
+                <i class="fas fa-heart" style="color: darkgreen"><span class="iconcount rating" id="avg_rating"> {{$avg_rating}}</span></i>
+
+                <script>
+                  var ratings = document.querySelectorAll(".rating")
+                  ratings.forEach(function(rating){
+                  rating.innerText= Number(rating.innerText).toFixed(1)
+                  })
+                </script>
+              </div>
+
+              <div class="col-3" style="padding: 0">
+                <i class="fas fa-comment-alt" style="color: darkgreen"><bdi class="iconcount"> {{$number_of_comments}}</bdi></i>
+              </div>
+
                 <div class="col-6">
                 </div>
 
@@ -61,8 +77,40 @@
                     <div class="col-6">
                       <h6 class="subtitle_h3_nolines">url: <a href="/blog/{{$post->slug}}">{{ url('blog/'.$post->slug) }}</a></h6>
                     </div>
-                    <div class="col-4">
+                    <div class="col-1">
                     </div>
+                    <div class="col-3">
+                      <!-- Botón para agregar o quitar de favoritos -->
+                        @if ($read)
+
+                          @if ($read->my_read === 0)
+
+                            {!! Form::model($read, ['route' => ['reads.update', $read->id], 'method' => 'PUT']) !!}
+                            <input type="hidden" name="my_read" value=1 readonly>
+                            {!! Form::submit('Volver a agregar a Mis Lecturas', ['class' => 'btn buttontype1']) !!}
+                            {!! Form::close()!!}
+
+                          @else ($read->my_read === 1)
+
+                            {!! Form::model($read, ['route' => ['reads.update', $read->id], 'method' => 'PUT']) !!}
+                            <input type="hidden" name="my_read" value=0 readonly>
+                            {!! Form::submit('Quitar de Mis Lecturas', ['class' => 'btn buttontype1']) !!}
+                            {!! Form::close()!!}
+
+                          @endif
+
+                        @else
+
+                          {!! Form::open(['route' => ['reads.create'], 'method' => 'GET']) !!}
+                          <input type="hidden" name="user_id" value="{{Auth::user()->id}}" readonly>
+                          <input type="hidden" name="post_id" value="{{$post->id}}" readonly>
+                          {!! Form::submit('Agregar a Mis Lecturas', ['class' => 'btn buttontype1']) !!}
+                          {!! Form::close()!!}
+
+                        @endif
+
+                    </div>
+
                     <div class="col-2">
                       <!-- Botón que abre el modal para comentar -->
                         <button type="button" class="btn buttontype1" data-toggle="modal" data-target="#modalCreateComment">Comentar</button>
@@ -81,7 +129,7 @@
       <div class="card-body">
 
         <h5 class="card-title posttitle">{{$post->title}}</h5>
-        <h6 class="card-title author">Autor: {{$post->user->name}}</h6>
+        <h6 class="card-title author">Autor: {{$post->user->alias}}</h6>
         <text class="card-text postbody" style="text-align: justify">{{$post->body}}</text>
 
 
@@ -98,7 +146,7 @@
 
                     <div class="card-header">
                       <h5 class="card-title posttitle">Comentario realizado el: {{$oneComment->created_at}}</h5>
-                      <h6 class="card-title author">Comentado por: {{$oneComment->user->name}}</h6>
+                      <h6 class="card-title author">Comentado por: {{$oneComment->user->alias}}</h6>
                     </div>
 
                     <div class="card-body">
@@ -129,7 +177,7 @@
 
                               <div class="card-header">
                                 <h5 class="card-title posttitle">Respuesta realizada el: {{$oneResponse->created_at}}</h5>
-                                <h6 class="card-title author">Respondido por: {{$oneResponse->user->name}}</h6>
+                                <h6 class="card-title author">Respondido por: {{$oneResponse->user->alias}}</h6>
                               </div>
                               <div class="card-body">
                                 <text class="card-text postbody" style="text-align: justify">{{$oneResponse->body}}</text>
@@ -274,7 +322,5 @@
   </div>
 </div> <!-- end of CreateComment modal -->
 @endif
-
-
 
 @endsection

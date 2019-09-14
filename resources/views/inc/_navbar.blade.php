@@ -2,7 +2,7 @@
 
 <div class="row top-nav-bar" style="background-color: darkgreen">
 
-  <div class="col-6 col-sm-8 col-lg-9 col-xl-10 top-nav-bar" style="display:flex; align-items:center">
+  <div class="col-8 top-nav-bar" style="display:flex; align-items:center; padding-right: 0px; padding-left: 0px">
     <a class="top-navbar" style="color: white">
 
     <?php
@@ -56,21 +56,21 @@
   </div>
 
   @guest
-  <div class="col-3 col-sm-2 col-lg-2 col-xl-1 top-nav-bar" style="text-align: right">
-    <a class="top-navbar" style="color: white" href="{{ route('login') }}">Iniciar sesión</a>
-  </div>
-  <div class="col-3 col-sm-2 col-lg-1 col-xl-1 top-nav-bar" style="text-align: right">
-    @if (Route::has('register'))
-    <a class="top-navbar" style="color: white" href="{{ route('register') }}">Regístrese</a>
-    @endif
-  </div>
+    <div class="col-2 top-nav-bar" style="text-align: right">
+      @if (Route::has('register'))
+        <a class="top-navbar" style="color: white" href="{{ route('register') }}">Regístrese</a>
+      @endif
+    </div>
+    <div class="col-2 top-nav-bar" style="text-align: right">
+      <a class="top-navbar" style="color: white" href="{{ route('login') }}">Iniciar sesión</a>
+    </div>
 
   @else
-  <div class="col-6 col-sm-4 col-lg-3 col-xl-2 top-nav-bar" style="text-align: right">
-    <a id="navbarDropdown" style="padding: 0; font-size: 11px; color: white" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-      {{Auth::user()->name}}
-      <img src="/storage/uploads/user_images/{{ Auth::user()->user_image }}" style="width: 40px; height: 40px; border-radius: 50%;"><span class="caret"></span>
-    </a>
+    <div class="col-4 top-nav-bar" style="text-align: right; padding-right: 0px; padding-left: 0px">
+      <a id="navbarDropdown" style="padding: 0; font-size: 11px; color: white" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        {{Auth::user()->alias}}
+        <img src="/storage/uploads/user_images/{{ Auth::user()->user_image }}" style="width: 40px; height: 40px; border-radius: 50%;"><span class="caret"></span>
+      </a>
 
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="background-color: darkgreen; font-size: 13px">
 
@@ -100,7 +100,8 @@
 
 </div> <!--end of div for the top part of the navbar-->
 
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: lightgreen; color: darkgreen; padding-right: 8px; padding-left: 8px">
+<!-- Main NavBar -->
+<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: lightgreen; color: darkgreen; padding-right: 8px; padding-left: 8px; padding-top: 5px; padding-bottom: 5px">
 
     <a class="navbar-brand" href="{{ url('/') }}" style="color: darkgreen">
       SicaMora
@@ -116,47 +117,61 @@
         @guest
         <div class="container-fluid" style="padding: 0; margin: 0">
           <div class="row" style="margin: 0">
+
             <div class="{{ Request::is("/") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Inicio</a>
+                <a class="nav-link" href="/" style="color: darkgreen; text-align: center; padding: 0">Publicaciones con mejores comentarios</a>
             </div>
+
+            <div class="{{ Request::is("/most_read") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
+                <a class="nav-link" href="/most_read" style="color: darkgreen; text-align: center; padding: 0">Publicaciones más leídas</a>
+            </div>
+
+            <div class="{{ Request::is("/new_posts") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center; padding: 0">
+                <a class="nav-link" href="/new_posts" style="color: darkgreen; text-align: center">Publicaciones recientes</a>
+            </div>
+
             <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Explorar</a>
+                <a class="nav-link" href="/authors" style="color: darkgreen; text-align: center; padding: 0">Autores</a>
             </div>
+
             <div class="{{ Request::is("about") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                <a class="nav-link" href="/about" style="color: darkgreen; text-align: center">Acerca de</a>
+                <a class="nav-link" href="/about" style="color: darkgreen; text-align: center; padding: 0">Acerca de</a>
             </div>
+
             <div class="{{ Request::is("faq") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                <a class="nav-link" href="/faq" style="color: darkgreen; text-align: center">Preguntas</a>
+                <a class="nav-link" href="/faq" style="color: darkgreen; text-align: center; padding: 0">Preguntas</a>
             </div>
-            <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Autores</a>
-            </div>
-            <div class="{{ Request::is("contact") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
+
+            <!--div class="{{ Request::is("contact") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
                 <a class="nav-link" href="/contact" style="color: darkgreen; text-align: center">Contacto</a>
-            </div>
+            </div-->
+
           </div>
         </div>
 
         @else
         <div class="container" style="padding: 0; margin: 0; width: 100%">
           <div class="row" style="margin: 0">
+            <div class="{{ Request::is("/") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-1" style="padding: 0; display: flex; align-items: center; justify-content: center">
+                <a class="nav-link" href="/my_reads" style="color: darkgreen; text-align: center">Mis lecturas</a>
+            </div>
+            <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
+                <a class="nav-link" href="/posts" style="color: darkgreen; text-align: center; padding: 0">Mis publicaciones</a>
+            </div>
+            <div class="nav-item col-12 col-sm-1" style="padding: 0; display: flex; align-items: center; justify-content: center">
+                <a class="nav-link" href="/posts/create" style="color: darkgreen; text-align: center; padding: 0">Publicar</a>
+            </div>
             <div class="{{ Request::is("/") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Inicio</a>
+                <a class="nav-link" href="/" style="color: darkgreen; text-align: center; padding: 0">Publicaciones con mejores comentarios</a>
+            </div>
+            <div class="{{ Request::is("/most_read") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
+                <a class="nav-link" href="/most_read" style="color: darkgreen; text-align: center; padding: 0">Publicaciones más leídas</a>
+            </div>
+            <div class="{{ Request::is("/new_posts") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
+                <a class="nav-link" href="/new_posts" style="color: darkgreen; text-align: center; padding: 0">Publicaciones recientes</a>
             </div>
             <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Mis lecturas</a>
-            </div>
-            <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                  <a class="nav-link" href="/posts" style="color: darkgreen; text-align: center">Mis publicaciones</a>
-            </div>
-            <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                <a class="nav-link" href="/posts/create" style="color: darkgreen; text-align: center">Publicar</a>
-            </div>
-            <div class="nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                <a class="nav-link" href="/" style="color: darkgreen; text-align: center">Autores</a>
-            </div>
-            <div class="{{ Request::is("contact") ? "itemmenuactivo" : "" }} nav-item col-12 col-sm-2" style="padding: 0; display: flex; align-items: center; justify-content: center">
-                <a class="nav-link" href="/contact" style="color: darkgreen; text-align: center">Contacto</a>
+                <a class="nav-link" href="/authors" style="color: darkgreen; text-align: center; padding: 0">Autores</a>
             </div>
           </div>
         </div>

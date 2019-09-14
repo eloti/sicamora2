@@ -17,14 +17,14 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-12 col-form-label text-md-left">{{ __('Nombre o Alias') }}</label>
+                            <label for="alias" class="col-12 col-form-label text-md-left">{{ __('Alias') }}</label>
 
                             <div class="col-12">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="alias" type="text" class="form-control{{ $errors->has('alias') ? ' is-invalid' : '' }}" name="alias" value="{{ old('alias') }}" required autofocus>
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('alias'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('alias') }}</strong>
                                     </span>
                                 @endif
                             </div>

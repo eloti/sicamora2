@@ -16,6 +16,10 @@ Route::get('/', function () {
 });
 
 Route::get('/', 'PagesController@index');
+Route::get('/most_read', 'PagesController@most_read');
+Route::get('/new_posts', 'PagesController@new_posts');
+Route::get('/my_reads', 'PagesController@my_reads');
+Route::get('/authors', 'AuthorsController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/faq', 'PagesController@faq');
 Route::get('/contact', 'PagesController@contact');
@@ -25,6 +29,7 @@ Route::resource('languages', 'LanguageController');
 Route::resource('assignments', 'AssignmentController');
 Route::resource('comments', 'CommentController');
 Route::resource('responses', 'ResponseController');
+Route::resource('reads', 'ReadController');
 Route::get('/admin/admindashboard', 'AdminDashboardController@index')->name('admin');
 
 //Auth::routes();
@@ -37,3 +42,4 @@ Route::put('/profile/{id}', 'UserController@update');
 //Slugs routes();
 //Route::get('/blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+');
 Route::get('/blog/{slug}', 'BlogController@getSingle')->name('singlePost');
+Route::get('/author/{id}', 'AuthorsController@getSingle')->name('singleAuthor');

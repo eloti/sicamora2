@@ -13,3 +13,110 @@
 <div style="margin-top: 10px; display: flex; justify-content: center">
   Mostrando página {{$all_post->currentPage()}} de {{$all_post->lastPage()}}
 </div>
+
+Privacy migration:
+
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class AddPrivacyAndAboutColumnsToUsers extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+    Schema::table('users', function (Blueprint $table) {
+      $table->longText('about')->nullable();
+      $table->string('name')->nullable();
+      $table->integer('priv_about')->default(0);
+      $table->integer('priv_id')->default(0);
+      $table->integer('priv_name')->default(0);
+      $table->integer('priv_email')->default(0);
+      $table->integer('priv_user_image')->default(0);
+      $table->integer('priv_gender')->default(0);
+      $table->integer('priv_birth')->default(0);
+      $table->integer('priv_city')->default(0);
+      $table->integer('priv_province_state')->default(0);
+      $table->integer('priv_country')->default(0);
+    });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
+    }
+}
+
+Alias migration:
+
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class AddAliasToUsers extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('alias')->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
+    }
+}
+
+
+myreads migration:
+
+$table->increments('id');
+$table->timestamps();
+$table->integer('user_id')->index();
+$table->integer('post_id')->index();
+$table->boolean('my_read');
+
+
+myreads create function:
+
+public function create(Request $request)
+{
+    $my_reads = new MyReads;
+    $my_reads->user_id = $request->user_id;
+    $my_reads->post_id = $request->post_id;
+    $my_reads->my_read = 1;
+    $my_reads->save();
+}
+
+Link to a slug:
+<div class="col-6">
+  <h6 class="subtitle_h3_nolines"><a href="/blog/{{$post->slug}}">{{ url('blog/'.$post->slug) }}</a></h6>
+</div>

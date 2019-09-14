@@ -4,7 +4,7 @@ El controlador es PagesController.php -->
 
 @extends('layouts.app')
 
-@section('title', "| Bienvenido")
+@section('title', "| Más leídas")
 
 @section('content')
 
@@ -15,7 +15,7 @@ El controlador es PagesController.php -->
     <div class="col-12">
 
       <div class="subtitle_one">
-        <h3 class="subtitle_h3">Publicaciones que más gustan a nuestros lectores</h3>
+        <h3 class="subtitle_h3">Publicaciones más leídas</h3>
       </div>
 
       @foreach ($all_post as $onePost) <!-- el controlador está en PagesController.php -->
