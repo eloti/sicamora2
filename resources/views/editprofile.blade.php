@@ -23,16 +23,25 @@
             <div class="row image_container col-12">
               <div class="col-6 special_button_container">
                 <label class="btn buttontype1">
-                  <input type="file" name="user_image">
+                  <input type="file" accept="image/*" id="file" onchange="loadFile(event)" name="user_image" style="display: none">
                   Cambie o suba una imagen
                 </label>
               </div>
               <div class="col-6">
                 <div class="image_container">
                   <img class="user_image" src="/storage/uploads/user_images/{{$user->user_image}}">
+                  
+                  <img id="output" width="200" />
                 </div>
               </div>
             </div>
+
+            <script>
+              var loadFile = function(event) {
+	            var user_image = document.getElementById('output');
+	            user_image.src = URL.createObjectURL(event.target.files[0]);
+              };
+            </script>
 
           <p class="mini_row_break"></p>
 
